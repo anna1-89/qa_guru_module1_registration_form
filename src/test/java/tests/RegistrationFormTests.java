@@ -1,12 +1,12 @@
 package tests;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationFormTests extends TestBase {
 
@@ -24,8 +24,7 @@ public class RegistrationFormTests extends TestBase {
         $(".react-datepicker__month-select").$(byText("January")).click();
         $(".react-datepicker__year-select").$(byText("1989")).click();
         $(".react-datepicker__month").$(byText("27")).click();
-        $("#subjectsWrapper").click();
-        $("#subjectsWrapper").$("#subjectsDropdown").$(byText("Computer Science")).click();
+        $("#subjectsInput").setValue("Computer Science").pressEnter();
         $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#uploadPicture").uploadFromClasspath("01.jpg");
         $("#currentAddress").setValue("Velikiy Novgorod");

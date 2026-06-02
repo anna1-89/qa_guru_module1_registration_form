@@ -11,7 +11,7 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void positiveFillAllFormTest() {
-        open("https://qa-guru.github.io/one-page-form/text-box.html");
+        open("/text-box.html");
         $("#userName").setValue("Anna Pilugina");
         $("#userEmail").setValue("anna1_89@mail.ru");
         $("#currentAddress").setValue("Zarelye");
@@ -26,7 +26,7 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void positiveFillRequiredFormTest() {
-        open("https://qa-guru.github.io/one-page-form/text-box.html");
+        open("/text-box.html");
         $("#userName").setValue("Anna Pilugina");
         $("#userEmail").setValue("anna1_89@mail.ru");
         $("#currentAddress").setValue("Zarelye");
@@ -39,7 +39,7 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void negativeInvalidEmailTest() {
-        open("https://qa-guru.github.io/one-page-form/text-box.html");
+        open("/text-box.html");
         $("#userName").setValue("Anna Pilugina");
         $("#userEmail").setValue("anna1");
         $("#currentAddress").setValue("Zarelye");
