@@ -108,7 +108,7 @@ public class RegistrationFormParametrizationTests extends TestBase {
     )
     @DisplayName("Регистрация возможна для обоих полов")
     void genderShouldBeDisplayedCorrectly(Gender gender) {
-        $("#genterWrapper").$(byText(gender.name())).exists();
+        $("#genterWrapper").$(byText(gender.name())).shouldBe(visible);
     }
 
     static Stream<Arguments> registrationSuccessfullForAllGenders(){
