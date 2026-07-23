@@ -71,7 +71,7 @@ public class RegistrationFormParametrizationTests extends TestBase {
             "Anna, Pilugina, Female, 1234567891",
             "Lev, Ivanov, Male, 9876543219"
     })
-    @ParameterizedTest(name = "Регистация при обязательных полях упешна для {0} {1} {2} {3}")
+    @ParameterizedTest(name = "Регистрация при обязательных полях упешна для {0} {1} {2} {3}")
     @Tags({
             @Tag("SMOKE"),
             @Tag("POSITIVE")

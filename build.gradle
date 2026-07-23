@@ -19,6 +19,5 @@ tasks.withType(JavaCompile) {
 }
 
 test {
-    useJUnitPlatform{includeTags("SMOKE", "POSITIVE")
-    }
-}
+    useJUnitPlatform()    }
+
