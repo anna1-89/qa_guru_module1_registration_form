@@ -14,43 +14,42 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void positiveFillAllFormTest() {
-        textBoxPage.openPage();
-        textBoxPage.enterUserName(userName);
-        textBoxPage.enterUserEmail(userEmail);
-        textBoxPage.enterCurrentAddress(currentAddress);
-        textBoxPage.enterPermanentAddress(permanentAddress);
-        textBoxPage.submitForm();
+        textBoxPage.openPage()
+                .enterUserName(userName)
+                .enterUserEmail(userEmail)
+                .enterCurrentAddress(currentAddress)
+                .enterPermanentAddress(permanentAddress)
+                .submitForm()
 
-        textBoxPage.assertSuccessSubmission("name", userName);
-        textBoxPage.assertSuccessSubmission("email", userEmail);
-        textBoxPage.assertSuccessSubmission("currentAddress", currentAddress);
-        textBoxPage.assertSuccessSubmission("permanentAddress", permanentAddress);
+                .assertSuccessSubmission("name", userName)
+                .assertSuccessSubmission("email", userEmail)
+                .assertSuccessSubmission("currentAddress", currentAddress)
+                .assertSuccessSubmission("permanentAddress", permanentAddress);
     }
 
     @Test
     void positiveFillRequiredFormTest() {
-        textBoxPage.openPage();
-        textBoxPage.enterUserName(userName);
-        textBoxPage.enterUserEmail(userEmail);
-        textBoxPage.enterCurrentAddress(currentAddress);
-        textBoxPage.submitForm();
+        textBoxPage.openPage()
+                .enterUserName(userName)
+                .enterUserEmail(userEmail)
+                .enterCurrentAddress(currentAddress)
+                .submitForm()
 
-        textBoxPage.assertSuccessSubmission("name", userName);
-        textBoxPage.assertSuccessSubmission("email", userEmail);
-        textBoxPage.assertSuccessSubmission("currentAddress", currentAddress);
+                .assertSuccessSubmission("name", userName)
+                .assertSuccessSubmission("email", userEmail)
+                .assertSuccessSubmission("currentAddress", currentAddress);
     }
 
     @Test
     void negativeInvalidEmailTest() {
-        textBoxPage.openPage();
-        textBoxPage.enterUserName(userName);
-        textBoxPage.enterUserEmail(userInvalidEmail);
-        textBoxPage.enterCurrentAddress(currentAddress);
-        textBoxPage.enterPermanentAddress(permanentAddress);
-        textBoxPage.submitForm();
+        textBoxPage.openPage()
+                .enterUserName(userName)
+                .enterUserEmail(userInvalidEmail)
+                .enterCurrentAddress(currentAddress)
+                .enterPermanentAddress(permanentAddress)
+                .submitForm()
 
-        textBoxPage.assertFailSubmission();
-
+                .assertFailSubmission();
     }
 
 }

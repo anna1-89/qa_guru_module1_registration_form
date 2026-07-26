@@ -19,35 +19,43 @@ public class TextBoxPage {
     private final SelenideElement outputResults = $("#output");
 
     //Actions
-    public void openPage() {
+    public TextBoxPage openPage() {
         open(pageAddress);
+        return this;
     }
 
-    public void enterUserName(String value) {
+    public TextBoxPage enterUserName(String value) {
         userNameField.setValue(value);
+        return this;
     }
 
-    public void enterUserEmail(String value) {
+    public TextBoxPage enterUserEmail(String value) {
         userEmailField.setValue(value);
+        return this;
     }
 
-    public void enterCurrentAddress(String value) {
+    public TextBoxPage enterCurrentAddress(String value) {
         currentAddressField.setValue(value);
+        return this;
     }
 
-    public void enterPermanentAddress(String value) {
+    public TextBoxPage enterPermanentAddress(String value) {
         permanentAddressField.setValue(value);
+        return this;
     }
 
-    public void submitForm() {
+    public TextBoxPage submitForm() {
         submitButton.click();
+        return this;
     }
 
-    public void assertSuccessSubmission(String key, String value) {
+    public TextBoxPage assertSuccessSubmission(String key, String value) {
         outputResults.$(byId(key)).shouldHave(text(value));
+        return this;
     }
 
-    public void assertFailSubmission() {
+    public TextBoxPage assertFailSubmission() {
         outputResults.shouldNotBe(visible);
+        return this;
     }
 }
