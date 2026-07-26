@@ -1,59 +1,55 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import pages.TextBoxPage;
 
 public class TextBoxTests extends TestBase{
-
     String userName = "Anna Pilugina";
     String userEmail = "anna1_89@mail.ru";
     String currentAddress = "Zarelye";
     String permanentAddress = "Velikiy Novgorod";
-
     String userInvalidEmail = "anna1_89mail.ru";
+
+    TextBoxPage textBoxPage = new TextBoxPage();
 
     @Test
     void positiveFillAllFormTest() {
-        open("/text-box.html");
-        $("#userName").setValue(userName);
-        $("#userEmail").setValue(userEmail);
-        $("#currentAddress").setValue(currentAddress);
-        $("#permanentAddress").setValue(permanentAddress);
-        $("#submit").click();
+        textBoxPage.openPage();
+        textBoxPage.enterUserName(userName);
+        textBoxPage.enterUserEmail(userEmail);
+        textBoxPage.enterCurrentAddress(currentAddress);
+        textBoxPage.enterPermanentAddress(permanentAddress);
+        textBoxPage.submitForm();
 
-        $("#output #name").shouldHave(text(userName));
-        $("#output #email").shouldHave(text(userEmail));
-        $("#output #currentAddress").shouldHave(text(currentAddress));
-        $("#output #permanentAddress").shouldHave(text(permanentAddress));
+        textBoxPage.assertSuccessSubmission("name", userName);
+        textBoxPage.assertSuccessSubmission("email", userEmail);
+        textBoxPage.assertSuccessSubmission("currentAddress", currentAddress);
+        textBoxPage.assertSuccessSubmission("permanentAddress", permanentAddress);
     }
 
     @Test
     void positiveFillRequiredFormTest() {
-        open("/text-box.html");
-        $("#userName").setValue(userName);
-        $("#userEmail").setValue(userEmail);
-        $("#currentAddress").setValue(currentAddress);
-        $("#submit").click();
+        textBoxPage.openPage();
+        textBoxPage.enterUserName(userName);
+        textBoxPage.enterUserEmail(userEmail);
+        textBoxPage.enterCurrentAddress(currentAddress);
+        textBoxPage.submitForm();
 
-        $("#output #name").shouldHave(text(userName));
-        $("#output #email").shouldHave(text(userEmail));
-        $("#output #currentAddress").shouldHave(text(currentAddress));
+        textBoxPage.assertSuccessSubmission("name", userName);
+        textBoxPage.assertSuccessSubmission("email", userEmail);
+        textBoxPage.assertSuccessSubmission("currentAddress", currentAddress);
     }
 
     @Test
     void negativeInvalidEmailTest() {
-        open("/text-box.html");
-        $("#userName").setValue(userName);
-        $("#userEmail").setValue(userInvalidEmail);
-        $("#currentAddress").setValue(currentAddress);
-        $("#permanentAddress").setValue(permanentAddress);
-        $("#submit").click();
+        textBoxPage.openPage();
+        textBoxPage.enterUserName(userName);
+        textBoxPage.enterUserEmail(userInvalidEmail);
+        textBoxPage.enterCurrentAddress(currentAddress);
+        textBoxPage.enterPermanentAddress(permanentAddress);
+        textBoxPage.submitForm();
 
-        $("#output").shouldNotBe(visible);
+        textBoxPage.assertFailSubmission();
 
     }
 
