@@ -1,159 +1,132 @@
 package tests;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static data.TestData.*;
 
 public class RegistrationFormTests extends TestBase {
 
     @Test
     void positiveFillAllFormTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(email);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(number);
-        $(".datepicker-field").click();
-        $(".react-datepicker__month-select").$(byText(monthBirthDate)).click();
-        $(".react-datepicker__year-select").$(byText(yearBirthDate)).click();
-        $(".react-datepicker__month").$(byText(birthDate)).click();
-        $("#subjectsInput").setValue(subject).pressEnter();
-        $("#hobbiesWrapper").$(byText(hobby)).click();
-        $("#uploadPicture").uploadFromClasspath(fileName);
-        $("#currentAddress").setValue(address);
-        $("#state").scrollTo().click();
-        $("#stateCity-wrapper").$(byText(state)).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText(city)).click();
-        $("#submit").scrollTo().click();
+        registrationFormPage
+                .openPage()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .enterUserEmail(email)
+                .chooseGender(gender)
+                .enterUserNumber(number)
+                .setDateOfBirth(birthDate, monthBirthDate, yearBirthDate)
+                .selectSubject(subject)
+                .selectHobby(hobby)
+                .uploadPicture(fileName)
+                .enterCurrentAddress(address)
+                .selectStateAndCity(state, city)
+                .submitForm()
 
-        $("#resultModal").shouldBe(visible);
-        $("#example-modal-sizes-title-lg").shouldHave(text(textSuccessRegistration));
-        $("#resultBody").$(byText("Student Name")).sibling(0).shouldHave(text(firstName + " " + lastName));
-        $("#resultBody").$(byText("Student Email")).sibling(0).shouldHave(text(email));
-        $("#resultBody").$(byText("Gender")).sibling(0).shouldHave(text(gender));
-        $("#resultBody").$(byText("Mobile")).sibling(0).shouldHave(text(number));
-        $("#resultBody").$(byText("Date of Birth")).sibling(0).shouldHave(text(birthDate + " " +  monthBirthDate.substring(0,3) + " " + yearBirthDate));
-        $("#resultBody").$(byText("Subjects")).sibling(0).shouldHave(text(subject));
-        $("#resultBody").$(byText("Hobbies")).sibling(0).shouldHave(text(hobby));
-        $("#resultBody").$(byText("Picture")).sibling(0).shouldHave(text(fileName));
-        $("#resultBody").$(byText("Address")).sibling(0).shouldHave(text(address));
-        $("#resultBody").$(byText("State and City")).sibling(0).shouldHave(text(state + " " + city));
+                .assertSuccessSubmission()
+                .checkSubmittedData("Student Name", firstName + " " + lastName)
+                .checkSubmittedData("Student Email", email)
+                .checkSubmittedData("Gender", gender)
+                .checkSubmittedData("Mobile", number)
+                .checkSubmittedData("Date of Birth", birthDate + " " +  monthBirthDate.substring(0,3) + " " + yearBirthDate)
+                .checkSubmittedData("Subjects", subject)
+                .checkSubmittedData("Hobbies", hobby)
+                .checkSubmittedData("Picture", fileName)
+                .checkSubmittedData("Address", address)
+                .checkSubmittedData("State and City", state + " " + city);
     }
 
     @Test
     void positiveFillRequiredFormTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .chooseGender(gender)
+                .enterUserNumber(number)
+                .submitForm()
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(number);
-        $("#submit").scrollTo().click();
-
-        $("#resultModal").shouldBe(visible);
-        $("#example-modal-sizes-title-lg").shouldHave(text(textSuccessRegistration));
-        $("#resultBody").$(byText("Student Name")).sibling(0).shouldHave(text(firstName + " " + lastName));
-        $("#resultBody").$(byText("Student Email")).sibling(0).shouldHave(text("-"));
-        $("#resultBody").$(byText("Gender")).sibling(0).shouldHave(text(gender));
-        $("#resultBody").$(byText("Mobile")).sibling(0).shouldHave(text(number));
-        $("#resultBody").$(byText("Date of Birth")).sibling(0).shouldHave(text("-"));
-        $("#resultBody").$(byText("Subjects")).sibling(0).shouldHave(text("-"));
-        $("#resultBody").$(byText("Hobbies")).sibling(0).shouldHave(text("-"));
-        $("#resultBody").$(byText("Picture")).sibling(0).shouldHave(text("-"));
-        $("#resultBody").$(byText("Address")).sibling(0).shouldHave(text("-"));
-        $("#resultBody").$(byText("State and City")).sibling(0).shouldHave(text("-"));
+                .assertSuccessSubmission()
+                .checkSubmittedData("Student Name", firstName + " " + lastName)
+                .checkSubmittedData("Student Email", email)
+                .checkSubmittedData("Gender", gender)
+                .checkSubmittedData("Mobile", number)
+                .checkSubmittedData("Date of Birth", "-")
+                .checkSubmittedData("Subjects", "-")
+                .checkSubmittedData("Hobbies", "-")
+                .checkSubmittedData("Picture", "-")
+                .checkSubmittedData("Address", "-")
+                .checkSubmittedData("State and City", "-");
     }
 
     @Test
     void negativeEmptyFormTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .submitForm()
 
-        $("#submit").scrollTo().click();
-
-        $("#formError").shouldBe(visible);
-        $("#formError").shouldHave(text(textNotSuccessRegistration));
+                .assertFailSubmission();
     }
 
     @Test
     void negativeNotAllRequiredFistNameTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .enterLastName(lastName)
+                .chooseGender(gender)
+                .enterUserNumber(number)
+                .submitForm()
 
-        $("#lastName").setValue(lastName);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(number);
-        $("#submit").scrollTo().click();
-
-        $("#formError").shouldBe(visible);
-        $("#formError").shouldHave(text(textNotSuccessRegistration));
+                .assertFailSubmission();
     }
 
     @Test
     void negativeNotAllRequiredLastNameTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .enterLastName(firstName)
+                .chooseGender(gender)
+                .enterUserNumber(number)
+                .submitForm()
 
-        $("#firstName").setValue(firstName);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(number);
-        $("#submit").scrollTo().click();
-
-        $("#formError").shouldBe(visible);
-        $("#formError").shouldHave(text(textNotSuccessRegistration));
+                .assertFailSubmission();
     }
 
     @Test
     void negativeNotAllRequiredGenderTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .enterLastName(firstName)
+                .enterLastName(lastName)
+                .enterUserNumber(number)
+                .submitForm()
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userNumber").setValue(number);
-        $("#submit").scrollTo().click();
-
-        $("#formError").shouldBe(visible);
-        $("#formError").shouldHave(text(textNotSuccessRegistration));
+                .assertFailSubmission();
     }
 
     @Test
     void negativeNotAllRequiredUserNumberTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .chooseGender(gender)
+                .submitForm()
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#submit").scrollTo().click();
-
-        $("#formError").shouldBe(visible);
-        $("#formError").shouldHave(text(textNotSuccessRegistration));
+                .assertFailSubmission();
     }
 
     @Test
     void negativeInvalidUserNumberTest() {
-        open("/automation-practice-form.html");
-        $("#fixedban").$(byText("×")).click();
+        registrationFormPage
+                .openPage()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .chooseGender(gender)
+                .enterUserNumber(invalidNumber)
+                .submitForm()
 
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(invalidNumber);
-        $("#submit").scrollTo().click();
-
-        $("#formError").shouldBe(visible);
-        $("#formError").shouldHave(text(textNotSuccessRegistration));
+                .assertFailSubmission();
     }
 
 }

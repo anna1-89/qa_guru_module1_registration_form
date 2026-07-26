@@ -17,7 +17,4 @@ public class TestData {
     public static String state = "Haryana";
     public static String city = "Karnal";
 
-    public static String textSuccessRegistration = "Thanks for submitting the form";
-    public static String textNotSuccessRegistration = "Please fill required fields and enter a valid 10-digit mobile number.";
-
 }

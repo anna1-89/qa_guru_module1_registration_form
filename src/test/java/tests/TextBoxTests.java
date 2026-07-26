@@ -1,7 +1,6 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-import pages.TextBoxPage;
 
 public class TextBoxTests extends TestBase{
     String userName = "Anna Pilugina";
@@ -10,11 +9,10 @@ public class TextBoxTests extends TestBase{
     String permanentAddress = "Velikiy Novgorod";
     String userInvalidEmail = "anna1_89mail.ru";
 
-    TextBoxPage textBoxPage = new TextBoxPage();
-
     @Test
     void positiveFillAllFormTest() {
-        textBoxPage.openPage()
+        textBoxPage
+                .openPage()
                 .enterUserName(userName)
                 .enterUserEmail(userEmail)
                 .enterCurrentAddress(currentAddress)
@@ -29,7 +27,8 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void positiveFillRequiredFormTest() {
-        textBoxPage.openPage()
+        textBoxPage
+                .openPage()
                 .enterUserName(userName)
                 .enterUserEmail(userEmail)
                 .enterCurrentAddress(currentAddress)
@@ -42,7 +41,8 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void negativeInvalidEmailTest() {
-        textBoxPage.openPage()
+        textBoxPage
+                .openPage()
                 .enterUserName(userName)
                 .enterUserEmail(userInvalidEmail)
                 .enterCurrentAddress(currentAddress)
