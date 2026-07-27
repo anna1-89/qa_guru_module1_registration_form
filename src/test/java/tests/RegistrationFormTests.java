@@ -10,6 +10,7 @@ public class RegistrationFormTests extends TestBase {
     void positiveFillAllFormTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .enterUserEmail(email)
@@ -40,6 +41,7 @@ public class RegistrationFormTests extends TestBase {
     void positiveFillRequiredFormTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .chooseGender(gender)
@@ -48,7 +50,7 @@ public class RegistrationFormTests extends TestBase {
 
                 .assertSuccessSubmission()
                 .checkSubmittedData("Student Name", firstName + " " + lastName)
-                .checkSubmittedData("Student Email", email)
+                .checkSubmittedData("Student Email", "-")
                 .checkSubmittedData("Gender", gender)
                 .checkSubmittedData("Mobile", number)
                 .checkSubmittedData("Date of Birth", "-")
@@ -63,6 +65,7 @@ public class RegistrationFormTests extends TestBase {
     void negativeEmptyFormTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .submitForm()
 
                 .assertFailSubmission();
@@ -72,6 +75,7 @@ public class RegistrationFormTests extends TestBase {
     void negativeNotAllRequiredFistNameTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterLastName(lastName)
                 .chooseGender(gender)
                 .enterUserNumber(number)
@@ -84,6 +88,7 @@ public class RegistrationFormTests extends TestBase {
     void negativeNotAllRequiredLastNameTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterLastName(firstName)
                 .chooseGender(gender)
                 .enterUserNumber(number)
@@ -96,6 +101,7 @@ public class RegistrationFormTests extends TestBase {
     void negativeNotAllRequiredGenderTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterLastName(firstName)
                 .enterLastName(lastName)
                 .enterUserNumber(number)
@@ -108,6 +114,7 @@ public class RegistrationFormTests extends TestBase {
     void negativeNotAllRequiredUserNumberTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .chooseGender(gender)
@@ -120,6 +127,7 @@ public class RegistrationFormTests extends TestBase {
     void negativeInvalidUserNumberTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .chooseGender(gender)

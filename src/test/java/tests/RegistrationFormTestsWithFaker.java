@@ -1,15 +1,50 @@
 package tests;
 
+import com.github.javafaker.Faker;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static data.TestData.*;
+import static utils.RandomUtils.getRandomGender;
 
 public class RegistrationFormTestsWithFaker extends TestBase {
+    public static String firstName;
+    public static String lastName;
+    public static String email;
+    public static String gender;
+    public static String number = "1234567891";
+    public static String invalidNumber = "123456789";
+    public static String monthBirthDate = "January";
+    public static String yearBirthDate = "1989";
+    public static String birthDate = "27";
+    public static String subject = "Computer Science";
+    public static String hobby = "Reading";
+    public static String fileName = "01.jpg";
+    public static String address = "Velikiy Novgorod";
+    public static String state = "Haryana";
+    public static String city = "Karnal";
+
+    @BeforeEach
+    void prepareRandomData() {
+        Faker faker = new Faker();
+        Faker fakerRu = new Faker(new Locale("ru"));
+        firstName = fakerRu.name().firstName();
+        lastName = fakerRu.name().lastName();
+        email = faker.internet().emailAddress();
+        gender = getRandomGender();
+
+
+        String currentAddress = fakerRu.address().fullAddress();
+        String permanentAddress = fakerRu.address().fullAddress();
+    }
 
     @Test
     void positiveFillAllFormTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .enterUserEmail(email)
@@ -40,6 +75,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void positiveFillRequiredFormTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .chooseGender(gender)
@@ -48,7 +84,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
 
                 .assertSuccessSubmission()
                 .checkSubmittedData("Student Name", firstName + " " + lastName)
-                .checkSubmittedData("Student Email", email)
+                .checkSubmittedData("Student Email", "-")
                 .checkSubmittedData("Gender", gender)
                 .checkSubmittedData("Mobile", number)
                 .checkSubmittedData("Date of Birth", "-")
@@ -63,6 +99,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void negativeEmptyFormTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .submitForm()
 
                 .assertFailSubmission();
@@ -72,6 +109,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void negativeNotAllRequiredFistNameTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterLastName(lastName)
                 .chooseGender(gender)
                 .enterUserNumber(number)
@@ -84,6 +122,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void negativeNotAllRequiredLastNameTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterLastName(firstName)
                 .chooseGender(gender)
                 .enterUserNumber(number)
@@ -96,6 +135,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void negativeNotAllRequiredGenderTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterLastName(firstName)
                 .enterLastName(lastName)
                 .enterUserNumber(number)
@@ -108,6 +148,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void negativeNotAllRequiredUserNumberTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .chooseGender(gender)
@@ -120,6 +161,7 @@ public class RegistrationFormTestsWithFaker extends TestBase {
     void negativeInvalidUserNumberTest() {
         registrationFormPage
                 .openPage()
+                .closeBanner()
                 .enterFirstName(firstName)
                 .enterLastName(lastName)
                 .chooseGender(gender)

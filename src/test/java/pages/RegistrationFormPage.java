@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.RegistrationResultComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RegistrationFormPage {
     //Elements
     private final String pageAddress = "/automation-practice-form.html";
+    private final SelenideElement banner = $("#fixedban").$(byText("×"));
     private final SelenideElement firstNameField = $("#firstName");
     private final SelenideElement lastNameField = $("#lastName");
     private final SelenideElement userEmailField = $("#userEmail");
@@ -27,20 +29,21 @@ public class RegistrationFormPage {
     private final SelenideElement stateField = $("#state");
     private final SelenideElement cityField = $("#city");
     private final SelenideElement submitButton = $("#submit");
-    private final SelenideElement resultComponent = $("#resultModal");
-    private final SelenideElement resultTable = $("#resultBody");
-    private final SelenideElement resultComponentTitle = $("#example-modal-sizes-title-lg");
     private final SelenideElement errorLabel = $("#formError");
 
-    public static String textSuccessRegistration = "Thanks for submitting the form";
     public static String textNotSuccessRegistration = "Please fill required fields and enter a valid 10-digit mobile number.";
 
     CalendarComponent calendar = new CalendarComponent();
+    RegistrationResultComponent registrationResultComponent = new RegistrationResultComponent();
 
     //Actions
     public RegistrationFormPage openPage() {
         open(pageAddress);
-        $("#fixedban").$(byText("×")).click();
+        return this;
+    }
+
+    public RegistrationFormPage closeBanner() {
+        banner.click();
         return this;
     }
 
@@ -119,13 +122,12 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage assertSuccessSubmission() {
-        resultComponent.shouldBe(visible);
-        resultComponentTitle.shouldHave(text(textSuccessRegistration));
+        registrationResultComponent.checkSuccessSubmission();
         return this;
     }
 
     public RegistrationFormPage checkSubmittedData(String key, String value) {
-        assertEquals(resultTable.$(byText(key)).sibling(0).text(), value);
+        registrationResultComponent.checkData(key, value);
         return this;
     }
 

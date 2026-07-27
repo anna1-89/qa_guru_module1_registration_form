@@ -5,18 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
+import static utils.RandomUtils.*;
+
 public class TextBoxTestsWithFaker extends TestBase{
-    Faker faker = new Faker();
-    Faker fakerRu = new Faker(new Locale("ru"));
-    String userName = fakerRu.name().fullName();
-    String userEmail = faker.internet().emailAddress();
-    String currentAddress = fakerRu.address().fullAddress();
-    String permanentAddress = fakerRu.address().fullAddress();
-    String userInvalidEmail = "anna1_89mail.ru";
 
     @Test
     void positiveFillAllFormTest() {
-
+        Faker faker = new Faker();
+        Faker fakerRu = new Faker(new Locale("ru"));
+        String userName = fakerRu.name().fullName();
+        String userEmail = faker.internet().emailAddress();
+        String currentAddress = fakerRu.address().fullAddress();
+        String permanentAddress = fakerRu.address().fullAddress();
         textBoxPage
                 .openPage()
                 .enterUserName(userName)
@@ -33,6 +33,9 @@ public class TextBoxTestsWithFaker extends TestBase{
 
     @Test
     void positiveFillRequiredFormTest() {
+        String userName = getRandomString(10);
+        String userEmail = getRandomEmail();
+        String currentAddress = getRandomString(100);
         textBoxPage
                 .openPage()
                 .enterUserName(userName)
@@ -47,6 +50,10 @@ public class TextBoxTestsWithFaker extends TestBase{
 
     @Test
     void negativeInvalidEmailTest() {
+        String userName = getRandomString(10);
+        String userInvalidEmail = getRandomInvalidEmail();
+        String currentAddress = getRandomString(100);
+        String permanentAddress = getRandomString(90);;
         textBoxPage
                 .openPage()
                 .enterUserName(userName)
