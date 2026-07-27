@@ -6,23 +6,22 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-import static data.TestData.*;
-import static utils.RandomUtils.getRandomGender;
+import static utils.RandomUtils.*;
 
 public class RegistrationFormTestsWithFaker extends TestBase {
     public static String firstName;
     public static String lastName;
     public static String email;
     public static String gender;
-    public static String number = "1234567891";
-    public static String invalidNumber = "123456789";
-    public static String monthBirthDate = "January";
-    public static String yearBirthDate = "1989";
-    public static String birthDate = "27";
+    public static String number;
+    public static String invalidNumber;
+    public static String monthBirthDate;
+    public static String yearBirthDate;
+    public static String birthDate;
     public static String subject = "Computer Science";
     public static String hobby = "Reading";
     public static String fileName = "01.jpg";
-    public static String address = "Velikiy Novgorod";
+    public static String address;
     public static String state = "Haryana";
     public static String city = "Karnal";
 
@@ -34,10 +33,12 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         lastName = fakerRu.name().lastName();
         email = faker.internet().emailAddress();
         gender = getRandomGender();
-
-
-        String currentAddress = fakerRu.address().fullAddress();
-        String permanentAddress = fakerRu.address().fullAddress();
+        number = String.valueOf(faker.number().randomNumber(10,true));
+        invalidNumber = String.valueOf(faker.number().randomNumber(9,false));;
+        monthBirthDate = getRandomMonthOfBirth();
+        yearBirthDate = String.valueOf(getRandomInt(1989, 2010));
+        birthDate = String.valueOf(faker.number().numberBetween(10,30));
+        address = fakerRu.address().fullAddress();
     }
 
     @Test

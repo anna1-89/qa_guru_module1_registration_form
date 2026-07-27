@@ -50,6 +50,11 @@ public class RandomUtils {
         return getRandomItemFromStringArray(genders);
     }
 
+    public static String getRandomMonthOfBirth() {
+        String[] genders = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return getRandomItemFromStringArray(genders);
+    }
+
     public static String getRandomItemFromStringArray(String[] stringArray) {
         int arrayLength = stringArray.length;
         int randomIndex = getRandomInt(0, arrayLength - 1);
