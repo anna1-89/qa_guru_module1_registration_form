@@ -14,9 +14,10 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://qa-guru.github.io/one-page-form";
+
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
     }
 
