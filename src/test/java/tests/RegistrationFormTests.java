@@ -1,58 +1,62 @@
 package tests;
 
+import data.TestData;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static data.TestData.*;
 
 public class RegistrationFormTests extends TestBase {
 
+    TestData testData = new TestData();
+
     @Test
+    @DisplayName("Успешная регистрация при заполнении всех полей")
     void positiveFillAllFormTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .enterUserEmail(email)
-                .chooseGender(gender)
-                .enterUserNumber(number)
-                .setDateOfBirth(birthDate, monthBirthDate, yearBirthDate)
-                .selectSubject(subject)
-                .selectHobby(hobby)
-                .uploadPicture(fileName)
-                .enterCurrentAddress(address)
-                .selectStateAndCity(state, city)
+                .enterFirstName(testData.firstName)
+                .enterLastName(testData.lastName)
+                .enterUserEmail(testData.email)
+                .chooseGender(testData.gender)
+                .enterUserNumber(testData.number)
+                .setDateOfBirth(testData.birthDate, testData.monthBirthDate, testData.yearBirthDate)
+                .selectSubject(testData.subject)
+                .selectHobby(testData.hobby)
+                .uploadPicture(testData.fileName)
+                .enterCurrentAddress(testData.address)
+                .selectStateAndCity(testData.state, testData.city)
                 .submitForm()
 
                 .assertSuccessSubmission()
-                .checkSubmittedData("Student Name", firstName + " " + lastName)
-                .checkSubmittedData("Student Email", email)
-                .checkSubmittedData("Gender", gender)
-                .checkSubmittedData("Mobile", number)
-                .checkSubmittedData("Date of Birth", birthDate + " " +  monthBirthDate.substring(0,3) + " " + yearBirthDate)
-                .checkSubmittedData("Subjects", subject)
-                .checkSubmittedData("Hobbies", hobby)
-                .checkSubmittedData("Picture", fileName)
-                .checkSubmittedData("Address", address)
-                .checkSubmittedData("State and City", state + " " + city);
+                .checkSubmittedData("Student Name", testData.firstName + " " + testData.lastName)
+                .checkSubmittedData("Student Email", testData.email)
+                .checkSubmittedData("Gender", testData.gender)
+                .checkSubmittedData("Mobile", testData.number)
+                .checkSubmittedData("Date of Birth", testData.birthDate + " " +  testData.monthBirthDate.substring(0,3) + " " + testData.yearBirthDate)
+                .checkSubmittedData("Subjects", testData.subject)
+                .checkSubmittedData("Hobbies", testData.hobby)
+                .checkSubmittedData("Picture", testData.fileName)
+                .checkSubmittedData("Address", testData.address)
+                .checkSubmittedData("State and City", testData.state + " " + testData.city);
     }
 
     @Test
+    @DisplayName("Успешная регистрация при заполнении только обязательных полей")
     void positiveFillRequiredFormTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .chooseGender(gender)
-                .enterUserNumber(number)
+                .enterFirstName(testData.firstName)
+                .enterLastName(testData.lastName)
+                .chooseGender(testData.gender)
+                .enterUserNumber(testData.number)
                 .submitForm()
 
                 .assertSuccessSubmission()
-                .checkSubmittedData("Student Name", firstName + " " + lastName)
+                .checkSubmittedData("Student Name", testData.firstName + " " + testData.lastName)
                 .checkSubmittedData("Student Email", "-")
-                .checkSubmittedData("Gender", gender)
-                .checkSubmittedData("Mobile", number)
+                .checkSubmittedData("Gender", testData.gender)
+                .checkSubmittedData("Mobile", testData.number)
                 .checkSubmittedData("Date of Birth", "-")
                 .checkSubmittedData("Subjects", "-")
                 .checkSubmittedData("Hobbies", "-")
@@ -62,6 +66,7 @@ public class RegistrationFormTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация при пустой форме")
     void negativeEmptyFormTest() {
         registrationFormPage
                 .openPage()
@@ -72,66 +77,71 @@ public class RegistrationFormTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация при незаполненном имени")
     void negativeNotAllRequiredFistNameTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterLastName(lastName)
-                .chooseGender(gender)
-                .enterUserNumber(number)
+                .enterLastName(testData.lastName)
+                .chooseGender(testData.gender)
+                .enterUserNumber(testData.number)
                 .submitForm()
 
                 .assertFailSubmission();
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация при незаполненной фамилии")
     void negativeNotAllRequiredLastNameTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterLastName(firstName)
-                .chooseGender(gender)
-                .enterUserNumber(number)
+                .enterLastName(testData.firstName)
+                .chooseGender(testData.gender)
+                .enterUserNumber(testData.number)
                 .submitForm()
 
                 .assertFailSubmission();
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация при невыбранном поле")
     void negativeNotAllRequiredGenderTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterLastName(firstName)
-                .enterLastName(lastName)
-                .enterUserNumber(number)
+                .enterLastName(testData.firstName)
+                .enterLastName(testData.lastName)
+                .enterUserNumber(testData.number)
                 .submitForm()
 
                 .assertFailSubmission();
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация при незаполненном номера телефона")
     void negativeNotAllRequiredUserNumberTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .chooseGender(gender)
+                .enterFirstName(testData.firstName)
+                .enterLastName(testData.lastName)
+                .chooseGender(testData.gender)
                 .submitForm()
 
                 .assertFailSubmission();
     }
 
     @Test
+    @DisplayName("Неуспешная регистрация при некорректном номере телефона")
     void negativeInvalidUserNumberTest() {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(firstName)
-                .enterLastName(lastName)
-                .chooseGender(gender)
-                .enterUserNumber(invalidNumber)
+                .enterFirstName(testData.firstName)
+                .enterLastName(testData.lastName)
+                .chooseGender(testData.gender)
+                .enterUserNumber(testData.invalidNumber)
                 .submitForm()
 
                 .assertFailSubmission();

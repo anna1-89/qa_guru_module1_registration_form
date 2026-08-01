@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultComponent;
 
@@ -37,62 +38,74 @@ public class RegistrationFormPage {
     RegistrationResultComponent registrationResultComponent = new RegistrationResultComponent();
 
     //Actions
+    @Step ("Открываем страницу регистрации")
     public RegistrationFormPage openPage() {
         open(pageAddress);
         return this;
     }
 
+    @Step ("Закрываем всплывающие окна")
     public RegistrationFormPage closeBanner() {
         banner.click();
         return this;
     }
 
+    @Step ("Вводим имя")
     public RegistrationFormPage enterFirstName(String value) {
         firstNameField.setValue(value);
         return this;
     }
 
+    @Step ("Вводим фамилию")
     public RegistrationFormPage enterLastName(String value) {
         lastNameField.setValue(value);
         return this;
     }
 
+    @Step ("Вводим email")
     public RegistrationFormPage enterUserEmail(String value) {
         userEmailField.setValue(value);
         return this;
     }
 
+    @Step ("Выбираем пол")
     public RegistrationFormPage chooseGender(String value) {
         genderContainer.$(byText(value)).click();
         return this;
     }
 
+    @Step ("Вводим номер телефона")
     public RegistrationFormPage enterUserNumber(String value) {
         userNumberField.setValue(value);
         return this;
     }
 
+    @Step ("Выбираем дату рождения")
     public RegistrationFormPage setDateOfBirth(String day, String month, String year) {
         calendarComponent.click();
         calendar.setDate(day, month, year);
         return this;
     }
 
+    @Step ("Выбираем предмет")
     public RegistrationFormPage selectSubject(String value) {
         subjectSelect.setValue(value).pressEnter();
         return this;
     }
 
+    @Step ("Выбираем хобби")
     public RegistrationFormPage selectHobby(String value) {
         hobbySelect.$(byText(value)).click();
         return this;
     }
 
+    @Step ("Загружаем изображение")
     public RegistrationFormPage uploadPicture(String value) {
         pictureSelect.uploadFromClasspath(value);
         return this;
     }
 
+    @Step ("Вводим текущий адрес")
     public RegistrationFormPage enterCurrentAddress(String value) {
         currentAddressField.setValue(value);
         return this;
@@ -110,27 +123,32 @@ public class RegistrationFormPage {
         return this;
     }
 
+    @Step ("Выбираем штат и город")
     public RegistrationFormPage selectStateAndCity(String state, String city) {
         selectState(state);
         selectCity(city);
         return this;
     }
 
+    @Step ("Нажимаем кнопку submit")
     public RegistrationFormPage submitForm() {
         submitButton.scrollTo().click();
         return this;
     }
 
+    @Step ("Проверяем успешность регистрации")
     public RegistrationFormPage assertSuccessSubmission() {
         registrationResultComponent.checkSuccessSubmission();
         return this;
     }
 
+    @Step ("Проверяем зарегистрированные данные")
     public RegistrationFormPage checkSubmittedData(String key, String value) {
         registrationResultComponent.checkData(key, value);
         return this;
     }
 
+    @Step ("Проверяем неуспешность регистрации")
     public RegistrationFormPage assertFailSubmission() {
         errorLabel.shouldBe(visible);
         errorLabel.shouldHave(text(textNotSuccessRegistration));

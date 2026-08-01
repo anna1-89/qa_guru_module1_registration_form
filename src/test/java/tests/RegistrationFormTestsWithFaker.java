@@ -14,30 +14,30 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(testData.firstName)
-                .enterLastName(testData.lastName)
-                .enterUserEmail(testData.email)
-                .chooseGender(testData.gender)
-                .enterUserNumber(testData.number)
-                .setDateOfBirth(testData.birthDate, testData.monthBirthDate, testData.yearBirthDate)
-                .selectSubject(testData.subject)
-                .selectHobby(testData.hobby)
-                .uploadPicture(testData.fileName)
-                .enterCurrentAddress(testData.address)
-                .selectStateAndCity(testData.state, testData.city)
+                .enterFirstName(testData.firstNameT)
+                .enterLastName(testData.lastNameT)
+                .enterUserEmail(testData.emailT)
+                .chooseGender(testData.genderT)
+                .enterUserNumber(testData.numberT)
+                .setDateOfBirth(testData.birthDateT, testData.monthBirthDateT, testData.yearBirthDateT)
+                .selectSubject(testData.subjectT)
+                .selectHobby(testData.hobbyT)
+                .uploadPicture(testData.fileNameT)
+                .enterCurrentAddress(testData.addressT)
+                .selectStateAndCity(testData.stateT, testData.cityT)
                 .submitForm()
 
                 .assertSuccessSubmission()
-                .checkSubmittedData("Student Name", testData.firstName + " " + testData.lastName)
-                .checkSubmittedData("Student Email", testData.email)
-                .checkSubmittedData("Gender", testData.gender)
-                .checkSubmittedData("Mobile", testData.number)
-                .checkSubmittedData("Date of Birth", testData.birthDate + " " +  testData.monthBirthDate.substring(0,3) + " " + testData.yearBirthDate)
-                .checkSubmittedData("Subjects", testData.subject)
-                .checkSubmittedData("Hobbies", testData.hobby)
-                .checkSubmittedData("Picture", fileName)
-                .checkSubmittedData("Address", testData.address)
-                .checkSubmittedData("State and City", testData.state + " " + testData.city);
+                .checkSubmittedData("Student Name", testData.firstNameT + " " + testData.lastNameT)
+                .checkSubmittedData("Student Email", testData.emailT)
+                .checkSubmittedData("Gender", testData.genderT)
+                .checkSubmittedData("Mobile", testData.numberT)
+                .checkSubmittedData("Date of Birth", testData.birthDateT + " " +  testData.monthBirthDateT.substring(0,3) + " " + testData.yearBirthDateT)
+                .checkSubmittedData("Subjects", testData.subjectT)
+                .checkSubmittedData("Hobbies", testData.hobbyT)
+                .checkSubmittedData("Picture", fileNameT)
+                .checkSubmittedData("Address", testData.addressT)
+                .checkSubmittedData("State and City", testData.stateT + " " + testData.cityT);
     }
 
     @Test
@@ -45,17 +45,17 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(testData.firstName)
-                .enterLastName(testData.lastName)
-                .chooseGender(testData.gender)
-                .enterUserNumber(testData.number)
+                .enterFirstName(testData.firstNameT)
+                .enterLastName(testData.lastNameT)
+                .chooseGender(testData.genderT)
+                .enterUserNumber(testData.numberT)
                 .submitForm()
 
                 .assertSuccessSubmission()
-                .checkSubmittedData("Student Name", testData.firstName + " " + testData.lastName)
+                .checkSubmittedData("Student Name", testData.firstNameT + " " + testData.lastNameT)
                 .checkSubmittedData("Student Email", "-")
-                .checkSubmittedData("Gender", testData.gender)
-                .checkSubmittedData("Mobile", testData.number)
+                .checkSubmittedData("Gender", testData.genderT)
+                .checkSubmittedData("Mobile", testData.numberT)
                 .checkSubmittedData("Date of Birth", "-")
                 .checkSubmittedData("Subjects", "-")
                 .checkSubmittedData("Hobbies", "-")
@@ -79,9 +79,9 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterLastName(testData.lastName)
-                .chooseGender(testData.gender)
-                .enterUserNumber(testData.number)
+                .enterLastName(testData.lastNameT)
+                .chooseGender(testData.genderT)
+                .enterUserNumber(testData.numberT)
                 .submitForm()
 
                 .assertFailSubmission();
@@ -92,9 +92,9 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterLastName(testData.firstName)
-                .chooseGender(testData.gender)
-                .enterUserNumber(testData.number)
+                .enterLastName(testData.firstNameT)
+                .chooseGender(testData.genderT)
+                .enterUserNumber(testData.numberT)
                 .submitForm()
 
                 .assertFailSubmission();
@@ -105,9 +105,9 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterLastName(testData.firstName)
-                .enterLastName(testData.lastName)
-                .enterUserNumber(testData.number)
+                .enterLastName(testData.firstNameT)
+                .enterLastName(testData.lastNameT)
+                .enterUserNumber(testData.numberT)
                 .submitForm()
 
                 .assertFailSubmission();
@@ -118,9 +118,9 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(testData.firstName)
-                .enterLastName(testData.lastName)
-                .chooseGender(testData.gender)
+                .enterFirstName(testData.firstNameT)
+                .enterLastName(testData.lastNameT)
+                .chooseGender(testData.genderT)
                 .submitForm()
 
                 .assertFailSubmission();
@@ -131,10 +131,10 @@ public class RegistrationFormTestsWithFaker extends TestBase {
         registrationFormPage
                 .openPage()
                 .closeBanner()
-                .enterFirstName(testData.firstName)
-                .enterLastName(testData.lastName)
-                .chooseGender(testData.gender)
-                .enterUserNumber(testData.invalidNumber)
+                .enterFirstName(testData.firstNameT)
+                .enterLastName(testData.lastNameT)
+                .chooseGender(testData.genderT)
+                .enterUserNumber(testData.invalidNumberT)
                 .submitForm()
 
                 .assertFailSubmission();
