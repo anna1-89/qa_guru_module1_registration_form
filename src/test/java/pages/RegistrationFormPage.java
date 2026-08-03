@@ -46,66 +46,67 @@ public class RegistrationFormPage {
 
     @Step ("Закрываем всплывающие окна")
     public RegistrationFormPage closeBanner() {
-        banner.click();
+        if (banner.exists())
+            banner.click();
         return this;
     }
 
-    @Step ("Вводим имя")
+    @Step ("Вводим имя: {value}")
     public RegistrationFormPage enterFirstName(String value) {
         firstNameField.setValue(value);
         return this;
     }
 
-    @Step ("Вводим фамилию")
+    @Step ("Вводим фамилию: {value}")
     public RegistrationFormPage enterLastName(String value) {
         lastNameField.setValue(value);
         return this;
     }
 
-    @Step ("Вводим email")
+    @Step ("Вводим email: {value}")
     public RegistrationFormPage enterUserEmail(String value) {
         userEmailField.setValue(value);
         return this;
     }
 
-    @Step ("Выбираем пол")
+    @Step ("Выбираем пол: {value}")
     public RegistrationFormPage chooseGender(String value) {
         genderContainer.$(byText(value)).click();
         return this;
     }
 
-    @Step ("Вводим номер телефона")
+    @Step ("Вводим номер телефона: {value}")
     public RegistrationFormPage enterUserNumber(String value) {
         userNumberField.setValue(value);
         return this;
     }
 
-    @Step ("Выбираем дату рождения")
+    @Step ("Выбираем дату рождения: {day}.{month}.{year}")
     public RegistrationFormPage setDateOfBirth(String day, String month, String year) {
         calendarComponent.click();
         calendar.setDate(day, month, year);
         return this;
     }
 
-    @Step ("Выбираем предмет")
+    @Step ("Выбираем предмет: {value}")
     public RegistrationFormPage selectSubject(String value) {
         subjectSelect.setValue(value).pressEnter();
         return this;
     }
 
-    @Step ("Выбираем хобби")
+    @Step ("Выбираем хобби: {value}")
     public RegistrationFormPage selectHobby(String value) {
         hobbySelect.$(byText(value)).click();
         return this;
     }
 
-    @Step ("Загружаем изображение")
+    @Step ("Загружаем изображение: {value}")
     public RegistrationFormPage uploadPicture(String value) {
         pictureSelect.uploadFromClasspath(value);
         return this;
     }
 
-    @Step ("Вводим текущий адрес")
+    @Step ("Вводим текущий адрес: {value}")
     public RegistrationFormPage enterCurrentAddress(String value) {
         currentAddressField.setValue(value);
         return this;
@@ -123,7 +124,7 @@ public class RegistrationFormPage {
         return this;
     }
 
-    @Step ("Выбираем штат и город")
+    @Step ("Выбираем штат и город: state is {state}, city is {city}")
     public RegistrationFormPage selectStateAndCity(String state, String city) {
         selectState(state);
         selectCity(city);
@@ -142,7 +143,7 @@ public class RegistrationFormPage {
         return this;
     }
 
-    @Step ("Проверяем зарегистрированные данные")
+    @Step ("Проверяем зарегистрированные данные: {key} has result {value}")
     public RegistrationFormPage checkSubmittedData(String key, String value) {
         registrationResultComponent.checkData(key, value);
         return this;

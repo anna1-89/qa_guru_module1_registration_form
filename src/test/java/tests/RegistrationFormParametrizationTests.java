@@ -45,7 +45,7 @@ public class RegistrationFormParametrizationTests extends TestBase {
         $(".react-datepicker__month").$(byText(birthDate)).click();
         $("#subjectsInput").setValue(subject).pressEnter();
         $("#hobbiesWrapper").$(byText(hobby)).click();
-        $("#uploadPicture").uploadFromClasspath("01.jpg");
+        $("#uploadPicture").uploadFromClasspath("picture.png");
         $("#currentAddress").setValue(address);
         $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText(state)).click();
@@ -62,7 +62,7 @@ public class RegistrationFormParametrizationTests extends TestBase {
         $("#resultBody").$(byText("Date of Birth")).sibling(0).shouldHave(text(birthDate + " " +  monthBirthDate.substring(0,3) + " " + yearBirthDate));
         $("#resultBody").$(byText("Subjects")).sibling(0).shouldHave(text(subject));
         $("#resultBody").$(byText("Hobbies")).sibling(0).shouldHave(text(hobby));
-        $("#resultBody").$(byText("Picture")).sibling(0).shouldHave(text("01.jpg"));
+        $("#resultBody").$(byText("Picture")).sibling(0).shouldHave(text("picture.png"));
         $("#resultBody").$(byText("Address")).sibling(0).shouldHave(text(address));
         $("#resultBody").$(byText("State and City")).sibling(0).shouldHave(text(state + " " + city));
     }

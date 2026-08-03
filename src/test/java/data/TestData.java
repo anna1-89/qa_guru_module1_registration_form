@@ -5,7 +5,7 @@ import com.github.javafaker.Faker;
 import java.util.Locale;
 
 public class TestData {
-    public static String fileName = "01.jpg";
+    public static String fileName = "picture.png";
 
     Faker fakerEn = new Faker(new Locale("en-US"));
     Faker fakerRu = new Faker(new Locale("ru"));
