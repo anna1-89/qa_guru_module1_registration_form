@@ -25,7 +25,7 @@ public class TestBase {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://qa-guru.github.io/one-page-form";
 
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 60000;
