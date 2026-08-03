@@ -91,7 +91,7 @@ public class RegistrationFormTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Успешная регистрация при заполнении только обязательных полей")
+    @DisplayName("Пример проваленного теста с не успешной регистрацией")
     void failedFillRequiredFormTest() {
         step("Открыть форму регистрации", () ->
                 registrationFormPage.openPage());
