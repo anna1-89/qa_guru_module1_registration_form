@@ -91,6 +91,41 @@ public class RegistrationFormTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Успешная регистрация при заполнении только обязательных полей")
+    void failedFillRequiredFormTest() {
+        step("Открыть форму регистрации", () ->
+                registrationFormPage.openPage());
+        step("Закрыть баннер", () ->
+                registrationFormPage.closeBanner());
+        step("Заполнить форму регистрации", () -> {
+            registrationFormPage
+                    .enterFirstName(testData.firstName)
+                    .enterLastName(testData.lastName)
+                    .chooseGender(testData.gender)
+                    .enterUserNumber(testData.number);
+        });
+        step("Нажать Submit", () ->
+                registrationFormPage.submitForm());
+        step("Проверить успешность регистрации", () -> {
+            step("Проверить, что регистрация прошла успешно", () ->
+                    registrationFormPage.assertSuccessSubmission());
+            step("Проверить корректность зарегистрированных данных", () -> {
+                registrationFormPage
+                        .checkSubmittedData("Student Name", testData.firstName + " " + testData.lastName)
+                        .checkSubmittedData("Student Email", "-")
+                        .checkSubmittedData("Gender", testData.gender)
+                        .checkSubmittedData("Mobile", "-")
+                        .checkSubmittedData("Date of Birth", "-")
+                        .checkSubmittedData("Subjects", "-")
+                        .checkSubmittedData("Hobbies", "-")
+                        .checkSubmittedData("Picture", "-")
+                        .checkSubmittedData("Address", "-")
+                        .checkSubmittedData("State and City", "-");
+            });
+        });
+    }
+
+    @Test
     @DisplayName("Не успешная регистрация при пустой форме")
     void negativeEmptyFormTest() {
         step("Открыть форму регистрации", () ->
