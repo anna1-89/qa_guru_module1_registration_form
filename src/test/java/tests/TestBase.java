@@ -34,9 +34,9 @@ public class TestBase {
         Configuration.browserVersion = System.getProperty("browserVersion", "149.0");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
-        String remoteUrl = System.getProperty("remoteUrl");
-        if (remoteUrl != null && !remoteUrl.isBlank()) {
-            Configuration.remote = remoteUrl;
+        String selenoidUrl = System.getProperty("selenoidUrl");
+        if (selenoidUrl != null && !selenoidUrl.isBlank()) {
+            Configuration.remote = selenoidUrl;
         }
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
