@@ -28,8 +28,16 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://qa-guru.github.io/one-page-form";
+        Configuration.baseUrl = System.getProperty("url", "https://qa-guru.github.io/one-page-form");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.browserVersion = System.getProperty("browserVersion", "149.0");
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+
+        String remoteUrl = System.getProperty("remoteUrl");
+        if (remoteUrl != null && !remoteUrl.isBlank()) {
+            Configuration.remote = remoteUrl;
+        }
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -43,8 +51,6 @@ public class TestBase {
 
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
-        Configuration.timeout = 10000;
-        Configuration.pageLoadTimeout = 60000;
 
     }
 
