@@ -31,7 +31,7 @@ public class TestBase {
         Configuration.baseUrl = System.getProperty("url", "https://qa-guru.github.io/one-page-form");
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-        Configuration.browserVersion = System.getProperty("browserVersion", "149.0");
+        Configuration.browserVersion = System.getProperty("browserVersion", "148.0");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
         String selenoidUrl = System.getProperty("selenoidUrl");
@@ -48,10 +48,6 @@ public class TestBase {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
-
     }
 
     @AfterEach
