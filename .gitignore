@@ -4,3 +4,5 @@
 /build
 gradlew
 gradlew.bat
+/notifications/draft.txt
+/notifications/config.json
