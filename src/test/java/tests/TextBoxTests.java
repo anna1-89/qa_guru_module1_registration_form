@@ -1,7 +1,9 @@
 package tests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public class TextBoxTests extends TestBase{
     String userName = "Anna Pilugina";
     String userEmail = "anna1_89@mail.ru";

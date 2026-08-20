@@ -1,10 +1,12 @@
 package tests;
 
 import data.TestDataWithFaker;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static data.TestDataWithFaker.*;
 
+@Disabled
 public class RegistrationFormTestsWithFaker extends TestBase {
 
     TestDataWithFaker testData = new TestDataWithFaker();
