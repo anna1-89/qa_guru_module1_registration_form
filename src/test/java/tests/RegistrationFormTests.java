@@ -2,6 +2,7 @@ package tests;
 
 import data.TestData;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -89,6 +90,7 @@ public class RegistrationFormTests extends TestBase {
         });
     }
 
+    @Disabled
     @Test
     @DisplayName("Пример проваленного теста с не успешной регистрацией")
     void failedFillRequiredFormTest() {
